@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - CineCloud</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.auth-page{max-width:520px;margin:60px auto;padding:30px}
+.auth-card{padding:30px;border-radius:14px;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.auth-card input{width:100%;box-sizing:border-box;margin:8px 0 16px;padding:12px;border:1px solid #ccc;border-radius:8px}
+.auth-card button{width:100%;padding:12px;border:0;border-radius:8px;cursor:pointer}
+.demo{margin-top:22px;padding:18px;border-radius:10px;background:#f5f5f5}
+.demo code{display:block;margin-top:5px}
+.message{padding:10px;border-radius:8px;margin:12px 0}.error{background:#ffe8e8}.success{background:#e8fff0}
+</style>
+</head>
+<body>
+<div class="auth-page">
+<div class="auth-card">
+<h1>CineCloud Login</h1>
+<p>Login to book movies or manage movies.</p>
+<div id="message"></div>
+<form id="loginForm">
+<label>Email</label>
+<input id="email" type="email" required>
+<label>Password</label>
+<input id="password" type="password" required>
+<button type="submit" class="btn">Login</button>
+</form>
+
+<div class="demo">
+<strong>Demo Accounts</strong>
+<p><b>Customer</b></p>
+<code>Email: customer@cinecloud.com</code>
+<code>Password: Customer123!</code>
+<p><b>Admin</b></p>
+<code>Email: admin@cinecloud.com</code>
+<code>Password: Admin123!</code>
+</div>
+<p style="margin-top:20px">Don't have an account? <a href="register.html">Register here</a></p>
+</div></div>
+<script>
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const msg=document.getElementById("message"); msg.innerHTML="";
+ try{
+  const r=await fetch("api/login.php",{method:"POST",headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({email:email.value.trim(),password:password.value})});
+  const d=await r.json();
+  if(!r.ok||!d.success) throw new Error(d.message||"Login failed.");
+  sessionStorage.setItem("cinecloudUser",JSON.stringify(d.user));
+  location.href=d.user.role.toLowerCase()==="admin"?"admin.html":"index.html";
+ }catch(err){msg.innerHTML='<div class="message error">'+err.message+'</div>';}
+});
+</script>
+</body></html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineCloud | Booking</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a class="logo" href="index.html">Cine<span>Cloud</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a class="active" href="booking.html">Booking</a></li>
+    <li><a href="admin.html">Admin</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+  <section class="page-title">
+    <h1>Book Your Tickets</h1>
+    <p>Fill in the details below.</p>
+  </section>
+
+  <div class="form-container">
+    <div id="bookingMessage"></div>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="customerName">Full Name</label>
+        <input id="customerName" type="text" required minlength="2" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="customerEmail">Email</label>
+        <input id="customerEmail" type="email" required placeholder="name@example.com">
+      </div>
+      <div class="form-group">
+        <label for="movieSelect">Movie</label>
+        <select id="movieSelect" required></select>
+      </div>
+      <div class="form-group">
+        <label for="showDate">Date</label>
+        <input id="showDate" type="date" required>
+      </div>
+      <div class="form-group">
+        <label for="showTime">Show Time</label>
+        <select id="showTime" required>
+          <option value="">Select time</option>
+          <option>11:00 AM</option>
+          <option>2:00 PM</option>
+          <option>5:00 PM</option>
+          <option>8:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="ticketQuantity">Ticket Quantity</label>
+        <input id="ticketQuantity" type="number" min="1" max="10" value="1" required>
+      </div>
+
+      <div class="booking-summary">
+        <p>Ticket Price: <strong id="ticketPrice">RM 0.00</strong></p>
+        <p>Quantity: <strong id="summaryQuantity">1</strong></p>
+        <p class="total-price">Total: <span id="totalPrice">RM 0.00</span></p>
+      </div>
+
+      <button class="btn" type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</main>
+
+<footer><p>© 2026 <span>CineCloud</span> | Movie Ticket Booking System</p></footer>
+<script src="js/script.js"></script>
+</body>
+</html>

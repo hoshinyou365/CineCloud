@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Register - CineCloud</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div class="auth-page" style="max-width:520px;margin:60px auto;padding:30px">
+<div class="auth-card" style="padding:30px;border-radius:14px;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.12)">
+<h1>Create CineCloud Account</h1><div id="message"></div>
+<form id="registerForm">
+<label>Full Name</label><input id="name" required minlength="2">
+<label>Email</label><input id="email" type="email" required>
+<label>Password</label><input id="password" type="password" required minlength="8">
+<button class="btn" type="submit">Create Account</button>
+</form><p>Already have an account? <a href="login.html">Login</a></p>
+</div></div>
+<script>
+registerForm.addEventListener("submit",async e=>{
+ e.preventDefault(); message.innerHTML="";
+ try{
+  const r=await fetch("api/register.php",{method:"POST",headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({name:name.value.trim(),email:email.value.trim(),password:password.value})});
+  const d=await r.json(); if(!r.ok||!d.success)throw new Error(d.message||"Registration failed.");
+  message.innerHTML='<div class="message success">'+d.message+'</div>';
+  setTimeout(()=>location.href="login.html",900);
+ }catch(err){message.innerHTML='<div class="message error">'+err.message+'</div>';}
+});
+</script></body></html>

@@ -1,0 +1,4 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Logout - CineCloud</title></head>
+<body><p>Logging out...</p><script>
+fetch("api/logout.php").finally(()=>{sessionStorage.removeItem("cinecloudUser");location.href="login.html";});
+</script></body></html>
